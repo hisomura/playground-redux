@@ -14,3 +14,4 @@ function counterReducer(state = { count: 0 }, action: Action) {
 }
 
 export const store = createStore(counterReducer);
+export type RootState = ReturnType<typeof counterReducer>;

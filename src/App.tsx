@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { store } from "./store";
+import { RootState, store } from "./store";
 
 const dispatch = store.dispatch;
+const defaultEqualityFn = (a: unknown, b: unknown) => a === b;
 
-function App() {
-  const [count, setCount] = useState(store.getState().count);
+function useSelector<TSelected = unknown>(
+  selector: (state: RootState) => TSelected,
+  equalityFn: (left: TSelected, right: TSelected) => boolean = defaultEqualityFn
+): TSelected {
+  const [selected, setSelected] = useState(selector(store.getState()));
+
   useEffect(() => {
+    let oldSelected: TSelected;
     store.subscribe(() => {
-      const currentState = store.getState().count;
-      if (count === currentState) return;
+      const currentSelected = selector(store.getState());
 
-      setCount(currentState);
+      if (equalityFn(selected, currentSelected)) return;
+
+      oldSelected = currentSelected;
+      setSelected(currentSelected);
     });
   }, []);
+
+  return selected;
+}
+
+function App() {
+  const count = useSelector((state) => state.count);
 
   return (
     <div className="App">
