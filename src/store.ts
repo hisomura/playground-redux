@@ -4,10 +4,10 @@ type Action = {
   type: "INCREMENT" | "FOOBAR";
 };
 
-function counterReducer(state = 0, action: Action) {
+function counterReducer(state = { count: 0 }, action: Action) {
   switch (action.type) {
     case "INCREMENT":
-      return state + 1;
+      return { ...state, count: state.count + 1 };
     default:
       return state;
   }

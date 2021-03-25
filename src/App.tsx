@@ -5,10 +5,10 @@ import { store } from "./store";
 const dispatch = store.dispatch;
 
 function App() {
-  const [count, setCount] = useState(store.getState());
+  const [count, setCount] = useState(store.getState().count);
   useEffect(() => {
     store.subscribe(() => {
-      const currentState = store.getState();
+      const currentState = store.getState().count;
       if (count === currentState) return;
 
       setCount(currentState);
