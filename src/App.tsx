@@ -19,9 +19,13 @@ function App() {
 
   return (
     <div className="App">
-      <div>count: {count}</div>
-      <div onClick={(_e) => dispatch({ type: "INCREMENT" })}>INCREMENT</div>
-      <div onClick={(_e) => dispatch({ type: "FOOBAR" })}>FOOBAR</div>
+      <div className="count">count: {count}</div>
+      <div className="button" onClick={(_e) => dispatch({ type: "INCREMENT" })}>
+        INCREMENT
+      </div>
+      <div className="button" onClick={(_e) => dispatch({ type: "FOOBAR" })}>
+        FOOBAR
+      </div>
     </div>
   );
 }
