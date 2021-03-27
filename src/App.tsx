@@ -7,10 +7,12 @@ const dispatch = store.dispatch;
 function App() {
   const [count, setCount] = useState(store.getState().count);
   useEffect(() => {
+    let oldCount = count;
     store.subscribe(() => {
       const currentCount = store.getState().count;
-      if (count === currentCount) return;
+      if (oldCount === currentCount) return;
 
+      oldCount = currentCount;
       setCount(currentCount);
     });
   }, []);
