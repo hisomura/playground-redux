@@ -8,10 +8,10 @@ function App() {
   const [count, setCount] = useState(store.getState().count);
   useEffect(() => {
     store.subscribe(() => {
-      const currentState = store.getState().count;
-      if (count === currentState) return;
+      const currentCount = store.getState().count;
+      if (count === currentCount) return;
 
-      setCount(currentState);
+      setCount(currentCount);
     });
   }, []);
 
